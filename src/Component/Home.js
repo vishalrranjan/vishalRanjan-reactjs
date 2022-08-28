@@ -14,6 +14,15 @@ const Home = () => {
     setProductList(data.products.reverse());
   };
 
+  // debounce function.
+  let typing;
+  const handleSearch = (e) => { 
+    clearTimeout(typing);
+    typing = setTimeout(()=>{
+      setSearchWord(e.target.value)
+    },400)
+   }
+
 //   const getIndividualCategories = async (id) => {
 //       const data = await get(`api/categories/${id}`);
 //       console.log(data);
@@ -38,7 +47,7 @@ const Home = () => {
           type="text"
           className="rounded pl-3 w-64 h-10 border-0 outline-none"
           placeholder="Type product name"
-          onChange={(e) => setSearchWord(e.target.value)}
+          onChange={handleSearch}
         />
         <Dropdown style={`w-64`} />
       </div>
